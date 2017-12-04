@@ -12,7 +12,7 @@ def vaild_move?(board,position)
 end
 
 def play(board, counter)
-  puts "選出你要下棋的位置，請請輸入 1-9："
+  puts "選出你要下棋的位置，請輸入 1-9："
   input = gets.chomp
   position = input.to_i - 1
 
