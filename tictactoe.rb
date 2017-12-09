@@ -12,9 +12,16 @@ def vaild_move?(board,position)
 end
 
 def play(board, counter)
-  puts "選出你要下棋的位置，請輸入 1-9："
-  input = gets.chomp
-  position = input.to_i - 1
+
+  if current_player(counter) == "X" # 12/09 新增跟電腦輪流下棋
+    puts "選出你要下棋的位置，請輸入 1-9："
+    input = gets.chomp
+    position = input.to_i - 1
+  else
+    puts "換電腦下棋"
+    position = computer_play(board)
+  end
+
 
   if vaild_move?(board,position) == true
     board[position] = current_player(counter)
@@ -22,6 +29,7 @@ def play(board, counter)
   else
     play(board, counter)
   end
+
 end
 
 def turn(board)
@@ -102,6 +110,25 @@ def winner(board)
     winner = board[win_combo[0]]
     return winner
   end
+end
+
+# 12/09 電腦選棋
+def computer_play(board)
+  avail_position(board).sample
+end
+
+def avail_position(board)
+  avail_position = Array.new
+
+  #board.each_with_index do |input, index|
+    #if input == " "
+  for position in 0..8
+    if board[position] == " "
+      #avail_position << index
+      avail_position << position
+    end
+  end
+  avail_position
 end
 
 ###################################################
